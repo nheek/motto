@@ -22,8 +22,8 @@ export default function MainRoot () {
   const [conversationHistory, setConversationHistory] = useState(() => {
     // Load conversation history from local storage or use initial guidelines
     if (typeof window !== 'undefined') {
-      const savedConvo = window.localStorage.getItem('conversation');
-      const storedHistory = JSON.parse(savedConvo ?? "{}");
+      const savedConvo = window.localStorage.getItem('conversation') || "null";
+      const storedHistory = JSON.parse(savedConvo);
       return storedHistory || [{ role: 'system', content: aiGuideline }];
     } else {
       return [{ role: 'system', content: aiGuideline }];
