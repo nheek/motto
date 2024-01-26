@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import fetchChatGPT from './api/open-ai';
 import TypingAnimation from '../components/typing-animation';
+import Background from '../components/background';
+import Dog from '../components/dog';
 
 // Initial guidelines for the AI assistant
 const aiGuideline = `
@@ -13,6 +15,7 @@ const aiGuideline = `
 `;
 
 export default function MainRoot () {
+  const [enterChat, setEnterChat] = useState(false);
   // Reference to the input element for focusing
   const inputRef = useRef<HTMLInputElement | null>(null);
   
@@ -96,30 +99,43 @@ export default function MainRoot () {
     }
   };
 
+  const handleEnterChatButton = () => {
+    setEnterChat(true);
+  }
+
   return (
-    <section className="h-screen w-[full] bg-blue-800 flex flex-col justify-center items-center">
-      <div className="h-[10vh] text-center">
-        <h1 className={`text-4xl ${isAiTalking ? "hidden": "block"}`}>Hi! I'm Motto!</h1>
-        <span className={`block opacity-60 ${isAiTalking ? "hidden": "block"}`}>Ask me about anything!</span>
-      </div>
-      <div className={`h-[25vh] ${isAiTalking ? "mb-20": ""}`}>
-        <div className={`loader !h-[100px] mt-6 ${isAiTalking ? 'loader-animated' : ''}`}>
-        
+    <>
+      <section className="h-screen w-[full] flex flex-col justify-center items-center">
+        <div className={`h-[10vh] text-center ${isAiTalking ? "hidden" : "block"}`}>
+          <h1 className={`text-4xl`}>Hi! I'm Motto!</h1>
+          <span className={`block opacity-60`}>Ask me about anything!</span>
         </div>
-      </div>
-      <div className="w-[70%] h-[30vh] mt-4 flex items-center">
+        <div className={`${enterChat ? "block" : "hidden"} ${isAiTalking ? "h-[30vh]" : "h-[25vh]"} flex items-center`}>
+          <div className={`loader !h-[100px] mt-6 ${isAiTalking ? 'loader-animated' : ''}`}>
+
+          </div>
+        </div>
+        <div className={`${isAiTalking ? "h-[50vh] mb-[15rem]" : "h-[40vh]"} mb-12 md:mb-[10rem] w-full md:w-[70%] flex items-center justify-center`}>
           {aiText}
-      </div>
-      <div className="absolute bottom-[5%] w-[80%] flex justify-center mt-10">
-        <input 
-          ref={inputRef}
-          onKeyDown={handleKeyDown}
-          className="w-[70%] h-[50px] text-xl text-blue-950 pl-6 rounded-3xl"
-          type="text" 
-          placeholder="Type here..."
-          disabled={isAiTalking}
-        />
-      </div>
-    </section>
+        </div>
+        <Dog customClassName={enterChat ? "hidden" : "block"}/>
+        <div className="absolute bottom-[5%] w-[95%] md:w-[80%] flex justify-center mt-10">
+          <input
+            ref={inputRef}
+            onKeyDown={handleKeyDown}
+            className={`${enterChat ? "block" : "hidden"} w-full md:w-[70%] h-[50px] text-xl text-[#4e54c8] pl-6 rounded-3xl`}
+            type="text"
+            placeholder="Type here..."
+            disabled={isAiTalking} />
+          <button 
+            className={`${enterChat ? "hidden" : "block"} px-8 py-3 rounded-full border-2 border-solid border-white border-opacity-50 hover:border-opacity-100`}
+            onClick={handleEnterChatButton}
+          >
+            Enter chat
+          </button>
+        </div>
+      </section>
+      <Background />
+    </>
   );
 };
