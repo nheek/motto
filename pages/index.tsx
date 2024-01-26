@@ -108,7 +108,7 @@ export default function MainRoot () {
       <section className="h-screen w-[full] flex flex-col justify-center items-center">
         <div className={`h-[10vh] text-center ${isAiTalking ? "hidden" : "block"}`}>
           <h1 className={`text-4xl`}>Hi! I'm Motto!</h1>
-          <span className={`block opacity-60`}>Ask me about anything!</span>
+          <span className={`block opacity-60`}>Your virtual friend!</span>
         </div>
         <div className={`${enterChat ? "block" : "hidden"} ${isAiTalking ? "h-[30vh]" : "h-[25vh]"} flex items-center`}>
           <div className={`loader !h-[100px] mt-6 ${isAiTalking ? 'loader-animated' : ''}`}>
@@ -118,7 +118,12 @@ export default function MainRoot () {
         <div className={`${isAiTalking ? "h-[50vh] mb-[15rem]" : "h-[40vh]"} mb-12 md:mb-[10rem] w-full md:w-[70%] flex items-center justify-center`}>
           {aiText}
         </div>
-        <Dog customClassName={enterChat ? "hidden" : "block"}/>
+        <button
+          className={`${enterChat ? "hidden" : "block"} absolute bottom-[24%]`}
+          onClick={handleEnterChatButton}
+        >
+          <Dog customClassName={enterChat ? "hidden" : "block"}/>
+        </button>
         <div className="absolute bottom-[5%] w-[95%] md:w-[80%] flex justify-center mt-10">
           <input
             ref={inputRef}
@@ -127,12 +132,7 @@ export default function MainRoot () {
             type="text"
             placeholder="Type here..."
             disabled={isAiTalking} />
-          <button 
-            className={`${enterChat ? "hidden" : "block"} px-8 py-3 rounded-full border-2 border-solid border-white border-opacity-50 hover:border-opacity-100`}
-            onClick={handleEnterChatButton}
-          >
-            Enter chat
-          </button>
+        <span className={enterChat ? "hidden" : "block"}>Start by petting the dog</span>
         </div>
       </section>
       <Background />

@@ -1,6 +1,6 @@
 export default function Dog ({customClassName = ""}) {
     return (
-        <section className={`${customClassName} absolute bottom-[25%]`}>
+        <section className={`${customClassName}`}>
           <svg className="sausage-dog-animation" xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 1200 1080">
             <ellipse className="shadow" ry="45" rx="350" cy="816" cx="498" opacity="1" fill="#B2CAE8" fill-opacity="1" stroke="#B2CAE8" stroke-width="4" />
             <path className="tail-blur" fill="#6f5a4b" d="M 180.265,568.972 14.092,504.432 C 40.893351,428.54412 92.941075,394.6756 159.419,390.74 l 29.972,170.684 c 1.155,6.575 -2.931,9.954 -9.126,7.548 z" opacity=".296" />
