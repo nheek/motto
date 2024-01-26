@@ -1,8 +1,8 @@
-# Motto
+# Nheek
 
-![Motto front page](https://www.nheek.no/featured-projects/motto.png)
+![Nheek front page](https://i.imgur.com/bE4qc2q.png)
 
-Motto is inspired by the film Ron's Gone Wrong. It is a virtual friend that should be able to talk to you naturally and be there when you need it! The name "Motto" is coined by my brother who heard me brainstorming about the name that I should use. 
+Nheek is my personal portfolio website where I showcase projects that I make that I feel like the world should see.
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ The installation is pretty straightforward, just follow the steps below and you 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/nheek/motto.git your-project
+    git clone https://github.com/nheek/nheek..git your-project
     ```
 
 2. Change into the project directory:
@@ -56,7 +56,7 @@ npm run dev
 
 ### Usage <a name="usage"></a>
 
-Motto is an AI that acts as your virtual friend. You can ask it about things you would normally tell a friend. It has a very cozy welcome page that allows you to pet a dog before entering the chat section itself.
+Nheek can be used to store your projects and have a hook for potential employers to see. It also has social links to link to your social media accounts and gives easy access to contact you. Otherwise, there's also a contact form that currently saves the data to a database. The website is also multilingual and you can follow the existing format and conditions to add your own preferred language.
 
 ### Deployment <a name="deployment"></a>
 
@@ -66,7 +66,7 @@ Motto is an AI that acts as your virtual friend. You can ask it about things you
 npm run build
 ```
 
-2. Run using NextJS command or use your own server running system
+2. Run using the NextJS command or use your production deployment method
 
 ```bash
 npm start
@@ -75,9 +75,9 @@ npm start
 ### Built With <a name="built-with"></a>
 
 - [NextJS](https://nextjs.org/)
+- [ReactJS](https://react.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Typescript](https://www.typescriptlang.org/)
-- [OpenAI](https://openai.com/blog/openai-api)
 
 ### Contributing <a name="contributing"></a>
 
