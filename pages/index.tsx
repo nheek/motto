@@ -106,7 +106,7 @@ export default function MainRoot () {
   return (
     <>
       <section className="h-screen w-[full] flex flex-col justify-center items-center">
-        <div className={`h-[20vh] md:h-[10vh] text-center ${isAiTalking ? "hidden" : "block"}`}>
+        <div className={`${enterChat ? "h-[10vh]" : "h-[20vh] md:h-[10vh]"} text-center ${isAiTalking ? "hidden" : "block"}`}>
           <h1 className={`text-4xl`}>Hi! I'm Motto!</h1>
           <span className={`block opacity-60`}>Your virtual friend!</span>
         </div>
@@ -124,11 +124,11 @@ export default function MainRoot () {
         >
           <Dog customClassName={enterChat ? "hidden" : "block"}/>
         </button>
-        <div className="absolute bottom-[5%] w-[95%] md:w-[80%] flex justify-center mt-10">
+        <div className="absolute bottom-[2%] md:bottom-[5%] w-[95%] md:w-[80%] flex justify-center mt-10">
           <input
             ref={inputRef}
             onKeyDown={handleKeyDown}
-            className={`${enterChat ? "block" : "hidden"} w-full md:w-[70%] h-[50px] text-xl text-[#4e54c8] pl-6 rounded-3xl`}
+            className={`${enterChat ? "block" : "hidden"} w-full md:w-[70%] h-[50px] bg-white bg-opacity-50 text-xl pl-6 rounded-3xl`}
             type="text"
             placeholder="Type here..."
             disabled={isAiTalking} />

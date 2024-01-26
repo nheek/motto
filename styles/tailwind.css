@@ -8,6 +8,10 @@
     font-family: "Poppins", sans-serif;
 }
 
+input::placeholder {
+  color: #fff;
+}
+
 /* HTML: <div class="loader"></div> */
 .loader-animated {
     animation: l19 2s infinite cubic-bezier(0.5,170,0.5,-170);
