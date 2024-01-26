@@ -106,7 +106,7 @@ export default function MainRoot () {
   return (
     <>
       <section className="h-screen w-[full] flex flex-col justify-center items-center">
-        <div className={`h-[10vh] text-center ${isAiTalking ? "hidden" : "block"}`}>
+        <div className={`h-[20vh] md:h-[10vh] text-center ${isAiTalking ? "hidden" : "block"}`}>
           <h1 className={`text-4xl`}>Hi! I'm Motto!</h1>
           <span className={`block opacity-60`}>Your virtual friend!</span>
         </div>
@@ -119,7 +119,7 @@ export default function MainRoot () {
           {aiText}
         </div>
         <button
-          className={`${enterChat ? "hidden" : "block"} absolute bottom-[24%]`}
+          className={`${enterChat ? "hidden" : "block"} absolute bottom-[17%] md:bottom-[24%]`}
           onClick={handleEnterChatButton}
         >
           <Dog customClassName={enterChat ? "hidden" : "block"}/>
