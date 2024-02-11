@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 const fetchChatGPT = async (messages) => {
     try {
       // Retrieve the OpenAI API key from environment variables
