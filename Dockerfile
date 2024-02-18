@@ -6,15 +6,14 @@ WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-COPY next.config.js ./
 
 # Install dependencies
-RUN npm install --only=production
+RUN npm install
 
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the Next.js app
+# Build the Next.js application
 RUN npm run build
 
 # Stage 2: Production Stage
@@ -26,5 +25,5 @@ WORKDIR /usr/src/app
 # Copy built assets from the build stage
 COPY --from=build /usr/src/app .
 
-# Start MySQL server and wait for it to be ready, then run the app
+# Start the Next.js application
 CMD ["npm", "start"]
