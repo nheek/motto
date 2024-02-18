@@ -105,7 +105,7 @@ export default function MainRoot () {
 
   return (
     <>
-      <section className="h-screen w-[full] flex flex-col justify-center items-center">
+      <div className="h-screen w-[full] flex flex-col justify-center items-center">
         <div className={`${enterChat ? "h-[10vh]" : "h-[20vh] md:h-[10vh]"} text-center ${isAiTalking ? "hidden" : "block"}`}>
           <h1 className={`text-4xl`}>Hi! I'm Motto!</h1>
           <span className={`block opacity-60`}>Your virtual friend!</span>
@@ -134,7 +134,7 @@ export default function MainRoot () {
             disabled={isAiTalking} />
         <span className={enterChat ? "hidden" : "block"}>Start by petting the dog</span>
         </div>
-      </section>
+      </div>
       <Background />
     </>
   );

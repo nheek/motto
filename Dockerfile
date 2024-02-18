@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:21-alpine
+# Stage 1: Build Stage
+FROM node:21-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -8,16 +8,22 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --only=production
 
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Build the Next.js application
+# Build the Next.js app
 RUN npm run build
 
-# Expose the port that Next.js will run on
-EXPOSE 3001
+# Stage 2: Production Stage
+FROM node:21-alpine AS production
 
-# Start the Next.js application
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy built assets from the build stage
+COPY --from=build /usr/src/app .
+
+# Start MySQL server and wait for it to be ready, then run the app
 CMD ["npm", "start"]

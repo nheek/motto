@@ -36,4 +36,4 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest
             docker stop motto || true
             docker rm motto || true
-            docker run -d --name motto --restart=unless-stopped -p 3001:3001 ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest
+            docker run -d --name motto --restart=unless-stopped -p 3008:3008 ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest
