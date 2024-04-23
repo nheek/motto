@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import fetchChatGPT from './api/open-ai';
-import TypingAnimation from '../components/typing-animation';
-import Background from '../components/background';
-import Dog from '../components/dog';
+import fetchChatGPT from './api/OpenAI';
+import TypingAnimation from '../components/TypingAnimation';
+import Background from '../components/Background';
+import Dog from '../components/Dog';
 
 // Initial guidelines for the AI assistant
 const aiGuideline = `

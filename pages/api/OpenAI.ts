@@ -38,5 +38,5 @@ const fetchChatGPT = async (messages) => {
     }
   };
   
-  // Export the function for use in other parts of the application
-  export default fetchChatGPT;
+// Export the function for use in other parts of the application
+export default fetchChatGPT;

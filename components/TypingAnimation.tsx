@@ -41,7 +41,10 @@ export default function TypingAnimation ({ text, speed }) {
   }, [text, speed]);
 
   return (
-    <p ref={containerRef} className='inline-block w-[90%] md:w-[80%] h-max max-h-full text-xl text-center overflow-hidden break-words'>
+    <p
+      ref={containerRef}
+      className='inline-block w-[90%] md:w-[80%] h-max max-h-full text-xl text-center overflow-hidden break-words'
+    >
       {displayText}
     </p>
   );
