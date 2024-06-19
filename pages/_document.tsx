@@ -14,6 +14,7 @@ export default function Document() {
           name="keywords"
           content="motto, ai friend, virtual friend, nheek, motto nheek, motto ai, motto friend"
         />
+        <link rel="icon" href="favicon.ico" />
       </Head>
       <body>
         <Providers>
