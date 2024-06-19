@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>{"Motto"}</title>
+        <title>{"Motto - your virtual friend"}</title>
         <meta
           name="description"
           content="Motto - your virtual friend"
