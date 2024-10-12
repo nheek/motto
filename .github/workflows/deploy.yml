@@ -33,7 +33,7 @@ jobs:
 
       - name: Create ConfigMap from .env file
         run: |
-          kubectl create configmap app-config --from-env-file=.env --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create configmap motto-config --from-env-file=.env --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to Kubernetes
         run: |
