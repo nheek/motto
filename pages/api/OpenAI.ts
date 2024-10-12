@@ -21,6 +21,7 @@ const fetchChatGPT = async (messages) => {
         }),
       });
 
+      console.log(apiKey)
       // Check if the API request was successful
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
