@@ -26,6 +26,14 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.DO_KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+      
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_OPEN_AI_API_KEY"=${{ secrets.NEXT_PUBLIC_OPEN_AI_API_KEY }} > .env
+
+      - name: Create ConfigMap from .env file
+        run: |
+          kubectl create configmap app-config --from-env-file=.env --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to Kubernetes
         run: |

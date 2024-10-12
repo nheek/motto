@@ -19,5 +19,8 @@ spec:
       containers:
       - name: motto
         image: nheek/motto:latest
+        envFrom:
+            - configMapRef:
+                name: app-config
         ports:
         - containerPort: 3000
