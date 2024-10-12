@@ -19,8 +19,11 @@ spec:
       containers:
       - name: motto
         image: nheek/motto:latest
-        envFrom:
-          - secretRef:
-              name: motto-secret
+        env:
+          - name: NEXT_PUBLIC_OPEN_AI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: motto-secret
+                key: NEXT_PUBLIC_OPEN_AI_API_KEY
         ports:
         - containerPort: 3000
