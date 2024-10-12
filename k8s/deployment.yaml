@@ -20,7 +20,7 @@ spec:
       - name: motto
         image: nheek/motto:latest
         envFrom:
-          - configMapRef:
-              name: motto-config
+          - secretRef:
+              name: motto-secret
         ports:
         - containerPort: 3000
