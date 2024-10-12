@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motto-deployment
+  labels:
+    app: motto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: motto
+  template:
+    metadata:
+      labels:
+        app: motto
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: motto
+        image: nheek/motto:latest
+        ports:
+        - containerPort: 3000
