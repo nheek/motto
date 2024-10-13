@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import fetchChatGPT from '@/app/components/OpenAi';
 import TypingAnimation from '@/app/components/TypingAnimation';
 import Background from '@/app/components/Background';
 import Dog from '@/app/components/Dog';
