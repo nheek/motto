@@ -20,10 +20,14 @@ spec:
       - name: motto
         image: nheek/motto:latest
         env:
-          - name: NEXT_PUBLIC_OPEN_AI_API_KEY
+          - name: OPEN_AI_API_KEY
             valueFrom:
               secretKeyRef:
                 name: motto-secret
-                key: NEXT_PUBLIC_OPEN_AI_API_KEY
+                key: OPEN_AI_API_KEY
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            memory: "40Mi"
+            memory: "100Mi"
