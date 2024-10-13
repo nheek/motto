@@ -1,42 +1,43 @@
 import { useState, useEffect, useRef } from 'react';
 
-export default function TypingAnimation ({ text, speed }) {
+interface TypingAnimationProps {
+  text: string;
+  speed: number;
+}
+
+export default function TypingAnimation({ text, speed }: TypingAnimationProps) {
   const [displayText, setDisplayText] = useState('');
   const containerRef = useRef<HTMLParagraphElement>(null);
-
+  
   useEffect(() => {
-    let index = 0;
-    let intervalId;
+    let index = 0; // Reset index on text change
+    let intervalId: NodeJS.Timeout | null = null;
 
     const animateText = () => {
-      setDisplayText('');
+      setDisplayText(''); // Clear previous text
 
       intervalId = setInterval(() => {
         setDisplayText((prevText) => {
           if (index < text.length) {
             return prevText + text[index++];
           } else {
-            clearInterval(intervalId);
+            clearInterval(intervalId!); // Stop the interval when done
             return prevText;
           }
         });
 
-        // Check if the containerRef has a current property before accessing its properties
+        // Scroll handling
         const container = containerRef.current;
         if (container) {
-          if (container.scrollHeight > container.clientHeight) {
-            container.classList.add('overflow-y-scroll');
-          } else {
-            container.classList.remove('overflow-y-scroll');
-          }
+          container.scrollTop = container.scrollHeight; // Scroll to the bottom
         }
       }, speed);
     };
 
-    animateText(); // Initial animation
+    animateText(); // Start animation
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalId) clearInterval(intervalId); // Cleanup on component unmount
     };
   }, [text, speed]);
 
@@ -48,4 +49,4 @@ export default function TypingAnimation ({ text, speed }) {
       {displayText}
     </p>
   );
-};
+}

@@ -1,8 +1,10 @@
+"use client";
+
 import { useState, useEffect, useRef } from 'react';
-import fetchChatGPT from './api/OpenAI';
-import TypingAnimation from '../components/TypingAnimation';
-import Background from '../components/Background';
-import Dog from '../components/Dog';
+import fetchChatGPT from '@/app/components/OpenAi';
+import TypingAnimation from '@/app/components/TypingAnimation';
+import Background from '@/app/components/Background';
+import Dog from '@/app/components/Dog';
 
 // Initial guidelines for the AI assistant
 const aiGuideline = `
@@ -35,7 +37,6 @@ export default function MainRoot () {
 
   // Sets the talking typing speed of the AI
   const [talkingTypingSpeed, setTalkingTypingSpeed] = useState(70);
-  console.log("API Key in client-side:", process.env.NEXT_PUBLIC_OPEN_AI_API_KEY);
 
   // Update local storage when conversation history changes
   useEffect(() => {
@@ -43,60 +44,56 @@ export default function MainRoot () {
   }, [conversationHistory]);
 
   // Function to communicate user input to the AI
-  const commsToAi = async (content) => {
+  const commsToAi = async (content: string) => {
     try {
-      // Update conversation history with the user's input
-      setConversationHistory((prevHistory) => [
+      setConversationHistory((prevHistory: { role: string; content: string }[]) => [
         ...prevHistory,
         { role: 'user', content },
       ]);
-
-      // Fetch AI response based on the updated conversation history
-      const updatedHistory = [...conversationHistory, { role: 'user', content }];
-      let response = await fetchChatGPT(updatedHistory);
-
-      // Update conversation history with the AI's response
-      setConversationHistory((prevHistory) => [
-        ...prevHistory,
-        response,
-      ]);
-
-      // Set AI talking state to trigger animations
+  
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userInput: content }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log(response, data);
+        const aiResponse = data.responseText;
+        setConversationHistory((prevHistory: { role: string; content: string }[]) => [
+          ...prevHistory,
+          { role: 'assistant', content: aiResponse },
+        ]);
+        setAiText(<TypingAnimation text={aiResponse} speed={talkingTypingSpeed} />);
+      } else {
+        console.error(data.error);
+        // Handle error appropriately
+      }
+  
       setIsAiTalking(true);
-
-      // Display AI response with typing animation
-      response = response ?? {role: "", content: ""};
-      let aiTyping = <TypingAnimation text={response.content} speed={talkingTypingSpeed} />;
-      setAiText(aiTyping);
-
-      // Disable AI talking state after the response animation
       setTimeout(() => {
         setIsAiTalking(false);
-
-        // Focus on the input after a brief delay
-        // The delay is needed, if not, it won't work because
-        // it will read the input as still disabled
-        setTimeout(() => {
-          if (inputRef.current) {
-            inputRef.current.focus();
-          }
-        }, 10);
-      }, response.content.length * talkingTypingSpeed);
+        inputRef.current?.focus();
+      }, data.responseText.length * talkingTypingSpeed);
     } catch (error) {
-      // Log and handle errors during AI communication
       console.error('Error in commsToAi:', error);
-      // No additional error handling for now
     }
   };
+  
+  
 
   // Function to handle user input on pressing Enter
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const userText = event.target.value;
+      const userText = (event.target as HTMLInputElement).value;
       // Communicate user input to the AI
       commsToAi(userText);
       // Clear the input field after sending the message
-      event.target.value = '';
+      (event.target as HTMLInputElement).value = '';
     }
   };
 

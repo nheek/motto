@@ -1,4 +1,6 @@
-const fetchChatGPT = async (messages) => {
+"use server";
+
+const fetchChatGPT = async (messages: { role: string; content: string }[]) => {
   try {
       // Retrieve the OpenAI API key from environment variables
       const apiKey = process.env.OPEN_AI_API_KEY;
@@ -10,7 +12,6 @@ const fetchChatGPT = async (messages) => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
-          'OpenAI-Beta': 'assistants=v1',
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo-1106',
