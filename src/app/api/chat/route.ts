@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPEN_AI_API_KEY, // Use your environment variable
+  apiKey: process.env.OPEN_AI_API_KEY,
 });
 const conversationHistory: { role: string; content: string }[] = [];
 

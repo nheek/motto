@@ -16,17 +16,21 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
+      - name: Create .env file
+        run: |
+          echo "OPEN_AI_API_KEY=${{ secrets.NEXT_PUBLIC_OPEN_AI_API_KEY }}" >> .env
+
       - name: Build and Push Docker Image
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest -f Dockerfile .
+          docker build --secret id=env,src=.env -t ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest -f Dockerfile .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/motto:latest
 
       - name: Set up kubectl
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.DO_KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
-      
+
       - name: Create Kubernetes Secret
         run: |
           kubectl create secret generic motto-secret --from-literal=OPEN_AI_API_KEY="${{ secrets.NEXT_PUBLIC_OPEN_AI_API_KEY }}" --dry-run=client -o yaml | kubectl apply -f -
