@@ -35,6 +35,7 @@ export default function MainRoot () {
 
   // Sets the talking typing speed of the AI
   const [talkingTypingSpeed, setTalkingTypingSpeed] = useState(70);
+  console.log("API Key in client-side:", process.env.NEXT_PUBLIC_OPEN_AI_API_KEY);
 
   // Update local storage when conversation history changes
   useEffect(() => {

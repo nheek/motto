@@ -160,3 +160,6 @@ dist
 yarn.lock
 package-lock.json
 npm-shrinkwrap.json
+
+k8s/development-service.yaml
+k8s/development.yaml

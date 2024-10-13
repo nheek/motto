@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 const fetchChatGPT = async (messages) => {
   try {
       // Retrieve the OpenAI API key from environment variables
@@ -21,7 +18,7 @@ const fetchChatGPT = async (messages) => {
         }),
       });
 
-      console.log(apiKey)
+      console.log("hi" , apiKey)
       // Check if the API request was successful
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
