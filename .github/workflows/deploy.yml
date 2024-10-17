@@ -31,15 +31,10 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.DO_KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
-      - name: Create Kubernetes Secret
-        run: |
-          kubectl create secret generic motto-secret --from-literal=OPEN_AI_API_KEY="${{ secrets.NEXT_PUBLIC_OPEN_AI_API_KEY }}" --dry-run=client -o yaml | kubectl apply -f -
-
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-          kubectl apply -f k8s/ingress.yaml
-          kubectl apply -f k8s/hpa.yaml
-          kubectl apply -f k8s/vpa.yaml
-          kubectl rollout restart deployment -n default motto-deployment
+          kubectl apply -f k3s/deployment.yaml
+          kubectl apply -f k3s/service.yaml
+          kubectl apply -f k3s/ingress.yaml
+          kubectl apply -f k3s/hpa.yaml
+          kubectl rollout restart deployment -n default motto-d

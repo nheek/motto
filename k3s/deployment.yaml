@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: motto-deployment
+  name: motto-d
   labels:
     app: motto
 spec:
@@ -19,14 +19,10 @@ spec:
       containers:
       - name: motto
         image: nheek/motto:latest
-        env:
-          - name: OPEN_AI_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: motto-secret
-                key: OPEN_AI_API_KEY
         ports:
         - containerPort: 3000
         resources:
           requests:
             memory: "30Mi"
+          limits:
+            memory: "70Mi"
