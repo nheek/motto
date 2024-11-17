@@ -1,0 +1,12 @@
+services:
+  motto:
+    build:
+      context: .
+      args:
+        OPEN_AI_API_KEY: ${OPEN_AI_API_KEY}
+    image: "reg.nheek.com/nheek/motto:latest"
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env

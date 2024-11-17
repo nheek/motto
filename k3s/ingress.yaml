@@ -3,21 +3,13 @@ kind: Ingress
 metadata:
   name: motto-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # Optional: Add Traefik-specific annotations if needed
+    # traefik.ingress.kubernetes.io/router.entrypoints: web
+    # traefik.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
   - host: motto.nheek.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: motto-service
-            port:
-              number: 80
-  - host: motto.nheek.no
     http:
       paths:
       - path: /

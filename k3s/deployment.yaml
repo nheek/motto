@@ -15,14 +15,14 @@ spec:
         app: motto
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: regcrednheek
       containers:
       - name: motto
-        image: nheek/motto:latest
+        image: reg.nheek.com/nheek/motto:latest
         ports:
-        - containerPort: 3000
+          - containerPort: 3000
         resources:
-          requests:
-            memory: "30Mi"
-          limits:
-            memory: "70Mi"
+            requests:
+              memory: "40Mi"
+            limits:
+              memory: "90Mi"
