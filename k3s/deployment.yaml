@@ -15,14 +15,29 @@ spec:
         app: motto
     spec:
       imagePullSecrets:
-      - name: regcrednheek
+        - name: regcrednheek
       containers:
-      - name: motto
-        image: reg.nheek.com/nheek/motto:latest
-        ports:
-          - containerPort: 3000
-        resources:
+        - name: motto
+          image: reg.nheek.com/nheek/motto:latest
+          ports:
+            - containerPort: 3000
+          resources:
             requests:
               memory: "40Mi"
-            limits:
-              memory: "90Mi"
+              cpu: "40m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            timeoutSeconds: 2
+            failureThreshold: 10
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            failureThreshold: 10
