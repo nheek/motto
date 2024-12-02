@@ -14,4 +14,4 @@ spec:
           service:
             name: motto-service
             port:
-              number: 30089
+              number: 30083

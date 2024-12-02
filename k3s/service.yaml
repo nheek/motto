@@ -7,7 +7,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 30089
+    - port: 30083
       targetPort: 3000
   selector:
     app: motto
